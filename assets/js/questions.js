@@ -1,6 +1,5 @@
 var questions = [
     {
-        number: 1,
         question: "The function and var are known as:",
         choices: [
             "Keywords", 
@@ -10,7 +9,6 @@ var questions = [
         answer: "Declaration Statements"
     },
     {
-        number: 2,
         question: "Which of the following methods can be used to display data in some form using Javascript?",
         choices: [
             "document.write()", 
@@ -20,7 +18,6 @@ var questions = [
         answer: "All of the above"
     },
     {
-        number: 3,
         question: "Which function is used to serialize an object into a JSON string in Javascript?",
         choices: [
             "stringify()", 
@@ -30,7 +27,6 @@ var questions = [
         answer: "stringify()"
     },
     {
-        number: 4,
         question: "How to stop an interval timer in Javascript?",
         choices: [
             "clearTimer", 
@@ -40,7 +36,6 @@ var questions = [
         answer: "clearInterval"
     },
     {
-        number: 5,
         question: "How do we write a comment in javascript?",
         choices: [
             "/* */", 
