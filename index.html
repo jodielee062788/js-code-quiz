@@ -3,51 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Quiz</title>
+    <title>JavaScript Quiz</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-
 <body>
-
-    <!-- Title of the quiz -->
-    <h1>Javascript Fundamentals Quiz</h1>
-
-    <!-- Start button -->
-    <div class="enter_button"><button>Enter</button></div>
-
-    <!-- Instructions -->
-    <div class="inst_quiz">
-        <div class="inst_quiz_title">Instructions before you start the quiz:</div>
-        <div class="inst_quiz_list">
-            <div class="inst">1. Click "Start Quiz" to begin the quiz.</div>
-            <div class="inst">2. Answer each questions correctly.</div>
-            <div class="inst">3. Incorrect answers deduct time from the timer.</div>
-            <div class="inst">4. Finish before time runs out or all questions are done.</div>
-            <div class="inst">5. Save your initials and score when the game ends.</div>
-            <div class="inst">6. Have fun playing the quiz game.</div>
-        </div>
-        <div class="start_button"><button>Start Quiz!</button></div>
-    </div>
-
-    <!-- Quiz Content -->
-    <div class="main_quiz">
-        <header>
-            <div class="timer">
-                <div class="time">Time:</div>
-                <div class="timer_sec">0</div>
+    <div class="container">
+        <div id="quiz-container">
+            <div id="start_page">
+                <h1>JavaScript Quiz</h1>
+                <div id="instructions">
+                    <p id="inst">Instructions before you start the quiz:</p>
+                    <p>1. Click "Start Quiz" to begin.</p>
+                    <p>2. Answer each questions correctly.</p>
+                    <p>3. Incorrect answers deduct time from the timer.</p>
+                    <p>4. Finish before time runs out or all questions are done.</p>
+                    <p>5. Save your initials and score when the game ends.</p>
+                    <p>6. Have fun playing the quiz game!</p>
+                </div>
+                <button id="start-btn">Start Quiz</button>
             </div>
-        </header>
-        <section>
-            <div class="questions"></div>
-            <div class="choices"></div>
-        </section>
+
+            <div id="question-container" class="hidden">
+                <p id="timer">Timer: 30</p>
+                <p id="question"></p>
+                <div id="answer-buttons" class="btn-container"></div>
+            </div>
+            
+            <div id="result-container" class="hidden">
+                <p id="result-text"></p>
+                <input type="text" id="initials" placeholder="Your Initials">
+                <button id="submit-btn">Submit</button>
+                <button id="restart-btn">Restart</button>
+            </div>
+            
+        </div>
     </div>
-    
-    <!-- High scores -->
-    <div class="high_scores">
-        <div class="complete_quiz">Congratulations! You've completed the quiz!</div>
-    </div>
-
-
-
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/questions.js"></script>
 </body>
 </html>
