@@ -29,16 +29,21 @@
             <div id="question-container" class="hidden">
                 <p id="timer">Timer: 30</p>
                 <p id="question"></p>
-                <div id="answer-buttons" class="btn-container"></div>
+                <div id="choices-btns" class="container-btn"></div>
             </div>
             
             <div id="result-container" class="hidden">
                 <p id="result-text"></p>
-                <input type="text" id="initials" placeholder="Your Initials">
+                <input type="text" id="initials" placeholder="YOUR INITIALS">
                 <button id="submit-btn">Submit</button>
-                <button id="restart-btn">Restart</button>
             </div>
             
+            <div id="leaderboard-container" class="hidden">
+                <h2>Leaderboard</h2>
+                <ul class="leaderboard-list" id="leaderboard-list"></ul>
+                <button id="reset-leaderboard-btn">Reset</button>
+                <button id="restart-leaderboard-btn">Restart</button>
+            </div>       
         </div>
     </div>
     <script src="./assets/js/script.js"></script>

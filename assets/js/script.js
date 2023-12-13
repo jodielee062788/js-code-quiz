@@ -1,13 +1,15 @@
 var startButton = document.getElementById('start-btn');
 var instructions = document.getElementById('instructions');
 var questionContainer = document.getElementById('question-container');
-var answerButtons = document.getElementById('answer-buttons');
+var choicesButtons = document.getElementById('choices-btns');
 var resultContainer = document.getElementById('result-container');
 var resultText = document.getElementById('result-text');
 var initialsInput = document.getElementById('initials');
 var submitButton = document.getElementById('submit-btn');
 var timerElement = document.getElementById('timer');
-var restartButton = document.getElementById('restart-btn');
+var leaderboardContainer = document.getElementById('leaderboard-container');
+var resetLeaderboardButton = document.getElementById('reset-leaderboard-btn');
+var restartLeaderboardButton = document.getElementById('restart-leaderboard-btn');
 
 var questionIndex = 0;
 var score = 0;
@@ -16,8 +18,10 @@ var timer;
 
 startButton.addEventListener('click', startQuiz);
 submitButton.addEventListener('click', saveScore);
-restartButton.addEventListener('click', restartQuiz);
+resetLeaderboardButton.addEventListener('click', resetLeaderboard);
+restartLeaderboardButton.addEventListener('click', restartQuiz);
 
+// Fisher-Yates shuffle algorithm
 function shuffleQuestions(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -29,6 +33,8 @@ function startQuiz() {
     startButton.classList.add('hidden');
     instructions.classList.add('hidden');
     questionContainer.classList.remove('hidden');
+    resultContainer.classList.add('hidden');
+    leaderboardContainer.classList.add('hidden');
 
     shuffleQuestions(questions);
 
@@ -41,44 +47,56 @@ function startQuiz() {
 
 function showQuestion(question) {
     document.getElementById('question').innerText = `${question.question}`;
-    resetAnswerButtons();
+    resetchoicesButtons();
     question.choices.forEach(choice => {
         var button = document.createElement('button');
         button.innerText = choice;
         button.classList.add('btn');
         button.addEventListener('click', () => selectAnswer(choice, question.answer));
-        answerButtons.appendChild(button);
+        choicesButtons.appendChild(button);
     });
 }
 
-function resetAnswerButtons() {
-    while (answerButtons.firstChild) {
-        answerButtons.removeChild(answerButtons.firstChild);
+function resetchoicesButtons() {
+    while (choicesButtons.firstChild) {
+        choicesButtons.removeChild(choicesButtons.firstChild);
     }
 }
 
 function selectAnswer(selectedChoice, correctAnswer) {
+    var buttons = document.querySelectorAll('#choices-btns .btn');
+
+    buttons.forEach(button => {
+        button.classList.remove('correct', 'incorrect');
+    });
+
     if (selectedChoice === correctAnswer) {
+        // Correct answer
         score++;
+        var selectedButton = Array.from(buttons).find(button => button.innerText === selectedChoice);
+        selectedButton.classList.add('correct');
     } else {
-        // Deduct 10 seconds for an incorrect answer
-        time -= 7;
-
-        // Ensure the time does not go below 0
+        // Incorrect answer
+        time -= 6;
         time = Math.max(0, time);
-
-        // Update the timer display
         timerElement.innerText = `Timer: ${time}`;
+        var correctButton = Array.from(buttons).find(button => button.innerText === correctAnswer);
+        correctButton.classList.add('correct');
+        var selectedButton = Array.from(buttons).find(button => button.innerText === selectedChoice);
+        selectedButton.classList.add('incorrect');
     }
 
-    questionIndex++;
+    setTimeout(() => {
+        questionIndex++;
 
-    if (questionIndex < questions.length) {
-        showQuestion(questions[questionIndex]);
-    } else {
-        endQuiz();
-    }
+        if (questionIndex < questions.length) {
+            showQuestion(questions[questionIndex]);
+        } else {
+            endQuiz();
+        }
+    }, 1200); // Adjust the delay time as needed
 }
+
 
 function endQuiz() {
     clearInterval(timer);
@@ -103,12 +121,49 @@ function updateTimer() {
   }
 }
 
+function displayLeaderboard() {
+    leaderboardContainer.classList.remove('hidden');
+    resultContainer.classList.add('hidden')
+    var highScores = JSON.parse(localStorage.getItem('highScores')) || '';
+    
+    var leaderboardHTML = '';
+    highScores.forEach((entry, index) => {
+        leaderboardHTML += `<li class="leaderboard-item">${index + 1}. ${entry.initials}: ${entry.score}</li>`;
+    });
+
+    document.getElementById('leaderboard-list').innerHTML = leaderboardHTML;
+}
+
+function resetLeaderboard() {
+    var isConfirmed = confirm('Are you sure you want to reset the leaderboard? This action cannot be undone.');
+
+    if (isConfirmed) {
+        // Clear the leaderboard data from localStorage
+        localStorage.removeItem('highScores');
+        
+        // Display a message indicating the reset
+        alert('Leaderboard has been reset!');
+        
+        // Optionally, reload the page to reflect the changes
+        location.reload();
+    } else {
+        return;
+    }
+}
+
 function saveScore() {
     var initials = initialsInput.value.trim();
 
     if (initials !== '') {
-        // Here you can save the initials and score to your desired storage (e.g., localStorage)
-        console.log(`Initials: ${initials}, Score: ${score}`);
+        var highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+        var newScore = { initials: initials, score: score };
+        highScores.push(newScore);
+        highScores.sort((a, b) => b.score - a.score); // Sort scores in descending order
+
+        localStorage.setItem('highScores', JSON.stringify(highScores));
+        
+        // Display the leaderboard
+        displayLeaderboard();
     } else {
         alert('Please enter your initials.');
     }
@@ -121,6 +176,7 @@ function restartQuiz() {
 
     // Clear existing HTML content
     resultContainer.classList.add('hidden');
+    leaderboardContainer.classList.add('hidden');
     resultText.innerText = '';
     initialsInput.value = '';
 

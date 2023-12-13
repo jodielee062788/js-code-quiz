@@ -6,10 +6,8 @@ body {
     height: 100vh;
     margin: 0;
     background-color: rgb(122, 207, 122);
-}
-
-#instructions {
-    font-size: 14px;
+    box-sizing: border-box;
+    border: 8px outset black;
 }
 
 .container {
@@ -17,16 +15,146 @@ body {
     max-width: 600px;
 }
 
+h1 {
+    color: rgb(231, 231, 119);
+    text-shadow: 2px 3px rgb(95, 94, 94);
+    font-size: 43px;
+    margin-bottom: 30px;
+}
+
+#instructions {
+    font-size: 15px;
+}
+
+#start-btn {
+    font-family: 'Silkscreen', sans-serif;
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 5px;
+    box-shadow: 2px 3px darkgrey;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#start-btn:hover,
+#submit-btn:hover,
+#reset-leaderboard-btn:hover,
+#restart-leaderboard-btn:hover  {
+    background-color: #fff;
+}
+
+#start-btn:active,
+#submit-btn:active,
+#reset-leaderboard-btn:active,
+#restart-leaderboard-btn:active {
+   transform: translate(2px);
+   box-shadow: 0 0 0;
+   outline: 0;
+}
+
 #quiz-container {
     text-align: center;
 }
 
-.btn-container {
-    display: flex;
+#timer {
+    font-size: 17px;
+    color: rgb(252, 91, 91);
+    text-shadow: 1px 1px rgb(53, 52, 52);
+}
+#question {
+    font-size: 18px;
+}
+
+.container-btn {
+    display: inline-flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+}
+
+#choices-btns .btn {
+    font-family: 'Silkscreen', sans-serif;
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 5px;
+    box-shadow: 2px 2px darkgrey;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+}
+
+#choices-btns .btn:hover {
+    background-color: #64b5ea;
+}
+
+#choices-btns .btn:active {
+   transform: translate(2px);
+   box-shadow: 0 0 0;
+   outline: 0;
+}
+
+#choices-btns .btn.correct {
+    background-color: rgb(103, 238, 103); /* or any color you prefer for correct answers */
+    border: 2px dashed black;
+}
+
+#choices-btns .btn.incorrect {
+    background-color: rgb(244, 124, 124); /* or any color you prefer for incorrect answers */
 }
 
 .hidden {
     display: none;
+}
+
+#result-text {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+#initials {
+    font-family: 'Silkscreen', sans-serif;
+    font-size: 13px;
+    padding: 8px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+#initials:focus {
+    outline: none;
+    border: 2px dashed black;
+}
+
+#submit-btn,
+#reset-leaderboard-btn,
+#restart-leaderboard-btn {
+    font-family: 'Silkscreen', sans-serif;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 3px darkgrey;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+.leaderboard-list {
+    list-style: none; 
+    padding: 0; 
+    font-size: 18px;
+}
+
+.leaderboard-item {
+    margin-bottom: 5px;
+}
+
+#reset-leaderboard-btn {
+    margin-top: 10px; 
+    margin-right: 10px;
 }
