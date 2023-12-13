@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Quiz</title>
 
+    <!-- Font from googlefonts -->
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./assets/css/style.css">
+
 </head>
 <body>
     <div class="container">
         <div id="quiz-container">
+
+            <!-- Front page -->
             <div id="start_page">
                 <h1>JavaScript Quiz</h1>
                 <div id="instructions">
@@ -26,18 +30,21 @@
                 <button id="start-btn">Start Quiz</button>
             </div>
 
+            <!-- Questions page -->
             <div id="question-container" class="hidden">
                 <p id="timer">Timer: 30</p>
                 <p id="question"></p>
                 <div id="choices-btns" class="container-btn"></div>
             </div>
             
+            <!-- Results page -->
             <div id="result-container" class="hidden">
                 <p id="result-text"></p>
                 <input type="text" id="initials" placeholder="YOUR INITIALS">
                 <button id="submit-btn">Submit</button>
             </div>
             
+            <!-- Leaderboard page -->
             <div id="leaderboard-container" class="hidden">
                 <h2>Leaderboard</h2>
                 <ul class="leaderboard-list" id="leaderboard-list"></ul>
@@ -46,7 +53,9 @@
             </div>       
         </div>
     </div>
+
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/questions.js"></script>
+
 </body>
 </html>
